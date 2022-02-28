@@ -27,12 +27,11 @@ clean:
 ### **3.** **编译内核模块程序**
 
 获取root权限后切换至内核动态模块程序所在的目录执行命令： #make
-
-![文本  描述已自动生成](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image002.png)
+![image-1](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-1.png)
 
 执行完命令后可以看到目录下生成了很多文件，列表如下（其中.ko文件就是编译产生的模块文件）：
 
-![图形用户界面, 应用程序  描述已自动生成](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image004.png)
+![image-2](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-2.png)
 
  
 
@@ -46,13 +45,13 @@ clean:
 
 此时可以使用 `lsmod` 命令来查看系统内的模块列表，以观察新设计的模块加载情况。
 
-![img](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image006.png)
+![image-3](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-3.png)
 
 然后查看内核日志信息，执行命令：`#dmesg -c`
 
 可以看到下图是我使用printk打印的内核日志消息：
 
-![img](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image008.png)
+![image-4](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-4.png)
 
 **5.** **卸载内核动态模块**
 
@@ -62,7 +61,7 @@ clean:
 
 此时可以使用 `lsmod` 命令查看系统内的模块列表，以观察新设计的模块卸载情况。可以看到该模块已经不存在。
 
-![文本  描述已自动生成](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image010.png)
+![image-5](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-5.png)
 
 ## 聊天的同步与互斥实现
 
@@ -72,15 +71,15 @@ clean:
 
 为了体现程序的健壮性，我开启了三个write写进程，代表三个用户，每个人都可以向聊天群中发消息，read程序就代表聊天群，用来接收每个人的消息。三个人按顺序介绍自己，又分别按顺序发了一句话。如下图：
 
-![文本  描述已自动生成](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image012.png)
+![image-1](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-6.png)
 
-![文本  描述已自动生成](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image014.png)
+![image-1](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-7.png)
 
-![文本  描述已自动生成](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image016.png)
+![image-1](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-8.png)
 
 然后运行read进程，可以读取到每个进程向设备发送的消息，且顺序并没有错乱，说明驱动程序的读写进程实现了同步与互斥。如下图：
 
-![文本  描述已自动生成](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image018.png)
+![image-1](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-9.png)
 
  
 
@@ -88,8 +87,8 @@ clean:
 
 chat.c利用读写进程之间的同步与互斥，实现了将读和写功能假如在一个程序当中，运行程序，打开两个进程代表两个用户进行聊天。如下图，进程4774和4776实验字符驱动设备进行聊天：
 
-![文本  描述已自动生成](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image020.png)
+![image-1](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-10.png)
 
-![文本  描述已自动生成](file:///C:/Users/DELL/AppData/Local/Temp/msohtmlclip1/01/clip_image022.png)
+![image-1](https://github.com/Bright-Hsu/Character-Device-Driver/blob/main/pictures/image-11.png)
 
 可以看到两个进程可以成功地通过字符驱动程序聊天，聊天程序设计正确。
